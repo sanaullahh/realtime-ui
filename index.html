@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pulse — Real-time UI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300&family=Epilogue:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="bg-layer">
+    <div class="bg-blob bg-blob--1"></div>
+    <div class="bg-blob bg-blob--2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header__brand">
+      <div class="brand-pulse" id="brandPulse"></div>
+      <span class="brand-name">Pulse</span>
+      <span class="brand-tag">Real-time Dashboard</span>
+    </div>
+    <div class="header__status">
+      <span class="status-dot" id="statusDot"></span>
+      <span class="status-text" id="statusText">Connecting…</span>
+    </div>
+    <div class="header__actions">
+      <button class="hdr-btn" id="pauseBtn">⏸ Pause</button>
+      <button class="hdr-btn hdr-btn--ghost" id="clearBtn">Clear All</button>
+    </div>
+  </header>
+
+  <!-- LAYOUT -->
+  <div class="layout">
+
+    <!-- LEFT COL -->
+    <div class="col-left">
+
+      <!-- Stats bar -->
+      <div class="stats-bar">
+        <div class="stat-pill">
+          <span class="stat-pill__label">Events/min</span>
+          <span class="stat-pill__val" id="eventsPerMin">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Total</span>
+          <span class="stat-pill__val" id="totalReceived">0</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Uptime</span>
+          <span class="stat-pill__val" id="uptimeVal">00:00</span>
+        </div>
+        <div class="stat-pill">
+          <span class="stat-pill__label">Last Ping</span>
+          <span class="stat-pill__val" id="lastPing">—</span>
+        </div>
+      </div>
+
+      <!-- Filter tabs -->
+      <div class="filter-row">
+        <button class="filter-tab active" data-filter="all">All</button>
+        <button class="filter-tab" data-filter="alert">
+          <span class="tab-dot tab-dot--alert"></span>Alert
+          <span class="tab-count" id="count-alert">0</span>
+        </button>
+        <button class="filter-tab" data-filter="success">
+          <span class="tab-dot tab-dot--success"></span>Success
+          <span class="tab-count" id="count-success">0</span>
+        </button>
+        <button class="filter-tab" data-filter="info">
+          <span class="tab-dot tab-dot--info"></span>Info
+          <span class="tab-count" id="count-info">0</span>
+        </button>
+        <button class="filter-tab" data-filter="warning">
+          <span class="tab-dot tab-dot--warning"></span>Warning
+          <span class="tab-count" id="count-warning">0</span>
+        </button>
+        <div class="filter-row__spacer"></div>
+        <label class="toggle-label">
+          <input type="checkbox" id="autoScrollToggle" checked />
+          <span class="toggle-track"><span class="toggle-thumb"></span></span>
+          Auto-scroll
+        </label>
+      </div>
+
+      <!-- Live feed -->
+      <div class="feed-wrap">
+        <div class="feed" id="feed">
+          <div class="feed__empty" id="feedEmpty">
+            <div class="feed__empty-icon">◈</div>
+            <p>Waiting for live events…</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT COL -->
+    <div class="col-right">
+
+      <!-- Notification Panel -->
+      <div class="panel">
+        <div class="panel__header">
+          <h3 class="panel__title"><span>◍</span> Notifications</h3>
+          <div class="panel__header-actions">
+            <span class="notif-badge" id="notifBadge">0</span>
+            <button class="panel-icon-btn" id="markAllRead">✓ All Read</button>
+          </div>
+        </div>
+        <div class="notif-list" id="notifList">
+          <div class="notif-empty" id="notifEmpty">No notifications yet</div>
+        </div>
+      </div>
+
+      <!-- WebSocket Console -->
+      <div class="panel panel--console">
+        <div class="panel__header">
+          <h3 class="panel__title"><span>⬡</span> WebSocket Console</h3>
+          <button class="panel-icon-btn" id="clearConsole">Clear</button>
+        </div>
+        <div class="console-log" id="consoleLog"></div>
+        <div class="console-input-row">
+          <span class="console-prompt">›</span>
+          <input type="text" class="console-input" id="consoleInput" placeholder="Send a message to server…" />
+          <button class="console-send" id="consoleSend">Send</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Auto-refresh progress bar at bottom -->
+  <div class="refresh-bar">
+    <div class="refresh-bar__fill" id="refreshFill"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
