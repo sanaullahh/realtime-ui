@@ -3,7 +3,7 @@
 A live, streaming real-time UI dashboard built with vanilla HTML, CSS, and JavaScript — submitted as **Task 6 (Advanced)** of the Nexe-Agent Frontend Developer Internship.
 
 ## 🔗 Live Demo[
-https://fancy-pithivier-333d5a.netlify.app/)
+https://uirealtime.netlify.app/
 
 ## ✦ Features
 
